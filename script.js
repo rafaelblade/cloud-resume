@@ -14,4 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  typeWriter();
+  // Fetch visitor count from backend API
+  fetch("https://your-api-id.execute-api.region.amazonaws.com/prod/visitors")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visitorCount").innerText = data.visits || "0";
+    })
+    .catch(err => {
+      console.error("Error fetching visitor count:", err);
+      document.getElementById("visitorCount").innerText = "N/A";
+    });
+});
